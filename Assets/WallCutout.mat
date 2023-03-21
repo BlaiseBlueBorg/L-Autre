@@ -38,13 +38,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9f101cfc925327044aa19b95894b0d23, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _Activate: 0
-    - _AlphaErosion: 0.122
+    - _AlphaErosion: 0.191
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _CutoutSize: 0.19

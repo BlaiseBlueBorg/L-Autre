@@ -24,7 +24,6 @@ public class WallCutout : MonoBehaviour
         
         Vector2 cutoutPosition = mainCamera.WorldToViewportPoint(player.position);
         
-        Debug.Log(cutoutPosition.y);
         cutoutPosition.y /= (Screen.width / Screen.height);
 
         //Vector3 offset = player.position - transform.position;

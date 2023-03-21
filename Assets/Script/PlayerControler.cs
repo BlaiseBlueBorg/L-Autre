@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,12 +7,13 @@ public class PlayerControler : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform rotateRoot;
-    [SerializeField] private GameObject camera; 
+    [SerializeField] private GameObject camera;
+    [SerializeField] private Transform respawn;
 
     [SerializeField] private Transform targetCamera;
-    [SerializeField] private float force = 2500f;
+    [SerializeField] private float force = 3f;
     [SerializeField] private float jumpForce = 300f;
-    [SerializeField] private float dashForce = 15f;
+    [SerializeField] private float dashForce = 50f;
     [SerializeField] private bool isOnFloor = true;
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool isDashing = false;
@@ -25,14 +27,15 @@ public class PlayerControler : MonoBehaviour
     private Vector3 direction; 
     [SerializeField] private float rotateMultiplier = 10f;
 
-    Keyboard keyboard = Keyboard.current; 
+    Keyboard keyboard = Keyboard.current;
+
+    private Vector3 dashDirection = Vector3.zero;
 
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
             isOnFloor = false;
-            isJumping = true;
             isDashing = false;
             Debug.Log("Is Not On Floor");
         }
@@ -45,6 +48,30 @@ public class PlayerControler : MonoBehaviour
             isOnFloor = true;
             isJumping = false;
             Debug.Log("Is On Floor");
+        }
+
+        if (collision.gameObject.CompareTag("DeathPlane"))
+        {
+            transform.position = respawn.position; 
+        }
+
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Debug.Log("Congratulations!!!!!!!!");
+        }
+    }
+
+    
+    private void FixedUpdate()
+    {
+        if (dashDirection != Vector3.zero)
+        {
+            rb.AddForce(dashDirection * dashForce);
+            StartCoroutine(CountDown());
+            Debug.Log("Dashing");
+            isJumping = false;
+            
+            dashDirection = Vector3.zero;
         }
     }
 
@@ -63,8 +90,7 @@ public class PlayerControler : MonoBehaviour
         float y = rb.velocity.y;
         if (!isDashing)
         {
-            rb.velocity = direction.normalized * (force * Time.deltaTime );
-            rb.velocity = new Vector3(rb.velocity.x * speedFactor, rb.velocity.y + y, rb.velocity.z * speedFactor);
+            transform.Translate(-direction.normalized * speedFactor * Time.deltaTime * force);
         }
         
         Jump();
@@ -81,9 +107,7 @@ public class PlayerControler : MonoBehaviour
 
             if(keyboard.dKey.isPressed && isDashing)
             {
-                rb.AddForce(camera.transform.right * dashForce);
-                StartCoroutine(CountDown());
-                Debug.Log("Dashing");
+                dashDirection = camera.transform.right;
             }
             else if(keyboard.dKey.isPressed)
             {
@@ -92,9 +116,7 @@ public class PlayerControler : MonoBehaviour
 
             if(keyboard.aKey.isPressed && isDashing)
             {
-                rb.AddForce(-camera.transform.right * dashForce);
-                StartCoroutine(CountDown());
-                Debug.Log("Dashing");
+                dashDirection = -camera.transform.right;
             }
             else if(keyboard.aKey.isPressed)
             {
@@ -103,9 +125,7 @@ public class PlayerControler : MonoBehaviour
         
             if(keyboard.wKey.isPressed && isDashing)
             {
-                rb.AddForce(camera.transform.forward * dashForce);
-                StartCoroutine(CountDown());
-                Debug.Log("Dashing");
+                dashDirection = camera.transform.forward;
             }
             else if(keyboard.wKey.isPressed)
             {
@@ -114,9 +134,7 @@ public class PlayerControler : MonoBehaviour
         
             if(keyboard.sKey.isPressed && isDashing)
             {
-                rb.AddForce(-camera.transform.forward * dashForce);
-                StartCoroutine(CountDown());
-                Debug.Log("Dashing");
+                dashDirection = -camera.transform.forward;
             }
             else if(keyboard.sKey.isPressed)
             {
@@ -124,6 +142,10 @@ public class PlayerControler : MonoBehaviour
             }
         
             direction.y = 0;
+        }
+        else
+        {
+            keyboard = Keyboard.current;
         }
     }
 
@@ -139,7 +161,7 @@ public class PlayerControler : MonoBehaviour
 
     private void Sprint()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isJumping)
         {
             speedFactor = speedFactorRun;
         }
@@ -163,14 +185,14 @@ public class PlayerControler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 4, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, transform.localScale.z);
 
             speedFactor = speedFactorCrouch;
         }
         
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 4, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
 
             speedFactor = speedFactorWalk;
         }
@@ -183,7 +205,7 @@ public class PlayerControler : MonoBehaviour
             rb.AddForce(0, jumpForce, 0);
             isJumping = true; 
         }
-        else if(Input.GetKeyDown(KeyCode.LeftShift) && isJumping)
+        else if(Input.GetKeyDown(KeyCode.Tab) && isJumping && !isDashing)
         {
             rb.AddForce(0, jumpForce * 2, 0);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
@@ -195,10 +217,10 @@ public class PlayerControler : MonoBehaviour
 
     private IEnumerator CountDown()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1);
         freezeMovement = false;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2);
         isDashing = false;
     }
 }
