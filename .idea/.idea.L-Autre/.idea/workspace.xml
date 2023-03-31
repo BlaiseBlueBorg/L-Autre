@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="40ccfb24-b73f-448c-ac75-0cfc3288a677" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.L-Autre/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.L-Autre/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerControler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerControler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Screen/TP_Low_ScreenMat_Emissive.1001.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Screen/TP_Low_ScreenMat_Emissive.1001.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Screen/TP_Low_ScreenMat_Height.1001.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Screen/TP_Low_ScreenMat_Height.1001.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Steel/TP_Low_SteelMat_BaseColor.1001.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Steel/TP_Low_SteelMat_BaseColor.1001.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Textures/Steel/TP_Low_SteelMat_Height.1001.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Textures/Steel/TP_Low_SteelMat_Height.1001.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/WallCutout.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WallCutout.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/WallCutout.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WallCutout.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
-    </list>
+    <list default="true" id="40ccfb24-b73f-448c-ac75-0cfc3288a677" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,6 +72,7 @@
       <updated>1678318475425</updated>
       <workItem from="1678318480267" duration="14000" />
       <workItem from="1679420980525" duration="7814000" />
+      <workItem from="1679436231296" duration="1000" />
     </task>
     <servers />
   </component>

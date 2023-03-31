@@ -47,7 +47,7 @@ Material:
     - _AlphaErosion: 0.191
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _CutoutSize: 0.19
+    - _CutoutSize: 0.1
     - _FalloffSize: 0.29
     m_Colors:
     - _CutoutPosition: {r: 0.53, g: 0.52, b: 0, a: 0}
